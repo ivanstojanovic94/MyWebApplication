@@ -1,5 +1,4 @@
-﻿
-using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using MyWebApplication.Data;
@@ -22,6 +21,7 @@ namespace MyWebApplication.Controllers
             _db = db;
             _web = web; 
         }
+
         public IActionResult Index()
         {
             IEnumerable<Product> objList = _db.Products;
@@ -66,20 +66,20 @@ namespace MyWebApplication.Controllers
 
                 if(obj.Product.Id == 0)
                 {
-                    string upload = webRootPath + WebConstant.ImagePath;
+                    string upload = webRootPath + WC.ImagePath;
                     string fileName = Guid.NewGuid().ToString();
                     string extension = Path.GetExtension(files[0].FileName);
 
-                    using (var fileStream = new FileStream(Path.Combine(upload, fileName, extension), FileMode.Create)) 
+                    using(var fileStream = new FileStream(Path.Combine(upload,fileName,extension), FileMode.Create))
                     {
-                        files[0].CopyTo(fileStream);  
+                        files[0].CopyTo(fileStream);
                     }
                     obj.Product.Image = fileName + extension;
-
                     _db.Products.Add(obj.Product);
                 }
-                else 
+                else
                 {
+
                 }
                 _db.SaveChanges();
                 return RedirectToAction("Index");

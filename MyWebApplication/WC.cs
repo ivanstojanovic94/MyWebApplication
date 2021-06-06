@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace MyWebApplication
 {
-    public static class WebConstant
+    public static class WC
     {
         public static string ImagePath = @"\images\product\";
     }
